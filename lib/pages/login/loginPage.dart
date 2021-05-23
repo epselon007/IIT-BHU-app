@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iit_app/external_libraries/spin_kit.dart';
 import 'package:iit_app/model/appConstants.dart';
-import 'package:iit_app/model/deprecatedWidgetsStyle.dart';
 import 'package:iit_app/model/sharedPreferenceKeys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -69,51 +68,34 @@ class _LoginPageState extends State<LoginPage> {
             ? Center(child: LoadingCircle)
             : ListView(
                 children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                    child: Text('Welcome to IIT(BHU)\'s Workshops App.',
-                        style: TextStyle(
-                            fontSize: 40.0, fontWeight: FontWeight.bold)),
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        height: 400,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/IIT BHU.jpg'),
+                                fit: BoxFit.cover)),
+                        padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+                        child: Text('Welcome to IIT(BHU)',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.w600)),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 15),
-                  OutlinedButton(
-                    style: outlineButtonStyle.copyWith(
-                      shape: MaterialStateProperty.all<OutlinedBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40)),
-                      ),
-                      side: MaterialStateProperty.resolveWith<BorderSide>(
-                          (states) {
-                        if (states.contains(MaterialState.pressed))
-                          return BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 1,
-                          );
-                        return BorderSide(color: Colors.grey);
-                      }),
-                      elevation:
-                          MaterialStateProperty.resolveWith<double>((states) {
-                        if (states.contains(MaterialState.pressed)) return 0.0;
-                        return null;
-                      }),
-                      overlayColor: MaterialStateProperty.resolveWith(
-                        (states) {
-                          if (states.contains(MaterialState.pressed))
-                            return Colors.grey;
-                          return null;
-                        },
-                      ),
-                      foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                        (states) {
-                          if (states.contains(MaterialState.pressed))
-                            return Colors.grey[400];
-                          return Colors.grey;
-                        },
-                      ),
-                    ),
+                  SizedBox(height: 10),
+                  OutlineButton(
+                    splashColor: Colors.grey,
                     onPressed: AppConstants.logInButtonEnabled == false
                         ? null
                         : () => _signInWithGoogle(),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40)),
+                    highlightElevation: 0,
+                    borderSide: BorderSide(color: Colors.purple),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                       child: Row(
@@ -127,26 +109,29 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.only(left: 10),
                             child: Text(
                               'Sign in with Google',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.black),
                             ),
                           )
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 15.0),
+                  SizedBox(height: 10.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
                         'Login Using Institute ID.',
-                        style: TextStyle(fontFamily: 'Montserrat'),
+                        // style: TextStyle(fontFamily: 'Montserrat'),
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),
-                  SizedBox(height: 150.0),
+                  SizedBox(height: 120.0),
                   GestureDetector(
                     onTap: () async {
                       await LoginPage.guestLoginSetup();
@@ -154,20 +139,24 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           '/home', ModalRoute.withName('/root'));
                     },
-                    child: CircleAvatar(
-                      radius: 52,
-                      backgroundColor: Colors.purple.withOpacity(0.3),
+                    child: Container(
+                      height: 100,
+                      alignment: Alignment.bottomRight,
                       child: CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Colors.black.withOpacity(0.8),
-                        child: Center(
-                            child: Text(
-                          'Guest',
-                          style: TextStyle(
-                              fontSize: 26,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        )),
+                        radius: 52,
+                        backgroundColor: Colors.purple.withOpacity(0.3),
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.black.withOpacity(0.8),
+                          child: Center(
+                              child: Text(
+                            'Guest',
+                            style: TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          )),
+                        ),
                       ),
                     ),
                   ),
