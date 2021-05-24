@@ -73,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: <Widget>[
                       Container(
                         height: 400,
+                        width: MediaQuery.of(context).size.width * 1,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage('assets/IIT BHU.jpg'),
@@ -162,36 +163,27 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   SizedBox(height: 120.0),
-                  GestureDetector(
-                    onTap: () async {
-                      await LoginPage.guestLoginSetup();
-
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/home', ModalRoute.withName('/root'));
-                    },
-                    child: Container(
-                      height: 100,
-                      alignment: Alignment.bottomRight,
-                      child: CircleAvatar(
-                        radius: 52,
-                        backgroundColor: Colors.purple.withOpacity(0.3),
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundColor: Colors.black.withOpacity(0.8),
-                          child: Center(
-                              child: Text(
-                            'Guest',
-                            style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          )),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
+        floatingActionButton: Container(
+          height: MediaQuery.of(context).size.width * 0.25,
+          width: MediaQuery.of(context).size.width * 0.25,
+          child: FloatingActionButton.extended(
+            onPressed: () async {
+              await LoginPage.guestLoginSetup();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/home', ModalRoute.withName('/root'));
+            },
+            label: Text(
+              'Guest',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor: Colors.black,
+          ),
+        ),
       ),
     );
   }
