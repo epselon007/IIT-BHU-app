@@ -78,8 +78,8 @@ class _LoginPageState extends State<LoginPage> {
                             image: DecorationImage(
                                 image: AssetImage('assets/IIT BHU.jpg'),
                                 fit: BoxFit.cover)),
-                        padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                        child: Text('Welcome to IIT(BHU)',
+                        padding: EdgeInsets.fromLTRB(0.0, 110.0, 0.0, 0.0),
+                        child: Text(' Welcome to IIT(BHU) ',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.white,
@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                       overlayColor: MaterialStateProperty.resolveWith(
                         (states) {
                           if (states.contains(MaterialState.pressed))
-                            return Colors.purple;
+                            return Colors.grey;
                           return null;
                         },
                       ),
@@ -177,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
             label: Text(
               'Guest',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: MediaQuery.of(context).size.width * 0.07,
                 fontWeight: FontWeight.bold,
               ),
             ),
